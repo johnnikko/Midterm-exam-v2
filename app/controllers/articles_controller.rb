@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :set_articles, only: [:edit,:update]
   def index
     @articles = Article.includes(:category).page(params[:page]).per(10)
   end
@@ -18,8 +19,29 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def edit
+    @article = Article.find(params[:id])
+    if @article.user_id != current_user.id
+      flash[:danger] = "User can only edit its own articles!"
+      redirect_to articles_path
+    end
+  end
+
+  def update
+    if @article.update(article_params)
+      flash[:sucsess] = "Article updated!"
+      redirect_to articles_path(page: params[:page])
+    else
+      render :edit
+    end
+  end
+
   private
   def article_params
     params.require(:article).permit(:title, :category_id, :content)
+  end
+
+  def set_articles
+    @article = Article.find(params[:id])
   end
 end

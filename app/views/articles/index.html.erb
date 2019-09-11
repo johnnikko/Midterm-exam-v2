@@ -5,8 +5,9 @@
 <table class="table table-bordered">
   <thead>
     <td width="5%">Id</td>
-    <td width="85%">Article</td>
+    <td width="75%">Article</td>
     <td width="10%">Category</td>
+    <td width="10%">Action</td>
   </thead>
   <tbody>
     <% @articles.each do |article| %>
@@ -14,6 +15,7 @@
         <td><%= article.id %></td>
         <td><%= article.title %></td>
         <td><%= article.category.name %></td>
+        <td><%= link_to "Edit", edit_article_path(article,page: params[:page]), class: "btn btn-warning" %></td>
       </tr>
     <% end %>
   </tbody>
