@@ -1,1 +1,21 @@
 <h1>Articles</h1>
+<%= link_to "Add Article", new_article_path, class: "btn btn-success" %>
+<br>
+<br>
+<table class="table table-bordered">
+  <thead>
+    <td width="5%">Id</td>
+    <td width="85%">Article</td>
+    <td width="10%">Category</td>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.id %></td>
+        <td><%= article.title %></td>
+        <td><%= article.category.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @articles %>
