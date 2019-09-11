@@ -12,9 +12,11 @@
     <table class="table table-bordered">
       <thead>
       <td width="5%">Id</td>
-      <td width="45%">Article</td>
+      <td width="30%">Article</td>
       <td width="10%">Category</td>
-      <td width="30%">Action</td>
+      <td width="10%">Owner</td>
+      <td width="15%">Created at</td>
+      <td width="25%">Action</td>
       </thead>
       <tbody>
       <% @articles.each do |article| %>
@@ -22,10 +24,12 @@
           <td><%= article.id %></td>
           <td><%= article.title %></td>
           <td><%= article.category.name %></td>
+          <td><%= article.user.email %></td>
+          <td><%= time_ago_in_words(article.created_at) %></td>
           <td>
-            <%= link_to "Show", article_path(article), class: "btn btn-primary" %>
-            <%= link_to "View", articles_path(id: article.id), class: "btn btn-warning" %>
-            <%= link_to "Delete", article_path(article),method: :delete, class: "btn btn-danger" %>
+            <%= link_to "Show", article_path(article), class: "btn btn-xs btn-primary" %>
+            <%= link_to "View", articles_path(id: article.id), class: "btn btn-xs btn-warning" %>
+            <%= link_to "Delete", article_path(article),method: :delete, class: "btn btn-xs btn-danger" %>
           </td>
         </tr>
       <% end %>
