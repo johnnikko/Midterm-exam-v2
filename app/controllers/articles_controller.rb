@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_articles, only: [:edit,:update,:destroy,:show]
+  before_action :authenticate_user!, only: [:create,:edit,:update,:destroy,:show]
+  before_action :check_user, only: [:update,:delete]
   def index
     @articles = Article.includes(:category).page(params[:page]).per(10)
     @article = Article.new
@@ -13,15 +15,12 @@ class ArticlesController < ApplicationController
       flash[:success] = "Article saved!"
       redirect_to articles_path
     else
-      render :new
+      render :index
     end
   end
 
   def edit
-    if @article.user_id != current_user.id
-      flash[:danger] = "User can only edit its own articles!"
-      redirect_to articles_path
-    end
+
   end
 
   def update
@@ -29,7 +28,7 @@ class ArticlesController < ApplicationController
       flash[:sucsess] = "Article updated!"
       redirect_to articles_path(page: params[:page])
     else
-      render :edit
+      render :index
     end
   end
 
@@ -58,4 +57,12 @@ class ArticlesController < ApplicationController
   def set_articles
     @article = Article.find(params[:id])
   end
+
+  def check_user
+    if @article.user_id != current_user.id
+      flash[:danger] = "User can only edit its own articles!"
+      redirect_to articles_path
+    end
+  end
+
 end

@@ -1,15 +1,23 @@
-<%= form_for article, url: url, method: methods do |f|%>
-  <div class="form-group">
-    <%= f.label :title, class: "control-label" %>
-    <%= f.text_field :title, class: "form-control" %>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="panel-title">Article Information</h1>
   </div>
-  <div class="form-group">
-    <%= f.label :category, class: "control-label" %>
-    <%= f.select :category_id,Category.all.pluck(:name,:id),{prompt:'select category'},{class: "form-control"}%>
+  <div class="panel-body">
+    <%= render partial: "shared/messages", locals:{obj: article} %>
+    <%= form_for article, url: url, method: methods do |f|%>
+      <div class="form-group">
+        <%= f.label :title, class: "control-label" %>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :category, class: "control-label" %>
+        <%= f.select :category_id,Category.all.pluck(:name,:id),{prompt:'select category'},{class: "form-control"}%>
+      </div>
+      <div class="form-group">
+        <%= f.label :content %>
+        <%= f.text_area :content, class: "form-control", rows: "10" %>
+      </div>
+      <%= f.submit class: "btn btn-primary" %>
+    <% end %>
   </div>
-  <div class="form-group">
-    <%= f.label :content %>
-    <%= f.text_area :content, class: "form-control", rows: "10" %>
-  </div>
-    <%= f.submit class: "btn btn-primary" %>
-<% end %>
+</div>
