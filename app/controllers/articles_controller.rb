@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_articles, only: [:edit,:update]
+  before_action :set_articles, only: [:edit,:update,:destroy]
   def index
     @articles = Article.includes(:category).page(params[:page]).per(10)
   end
@@ -20,7 +20,6 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
     if @article.user_id != current_user.id
       flash[:danger] = "User can only edit its own articles!"
       redirect_to articles_path
@@ -33,6 +32,18 @@ class ArticlesController < ApplicationController
       redirect_to articles_path(page: params[:page])
     else
       render :edit
+    end
+  end
+
+  def destroy
+    if @article.user_id != current_user.id
+      flash[:danger] = "User can only edit its own articles!"
+      redirect_to articles_path
+    else
+      if @article.destroy
+        flash[:danger] = "Article delete!"
+        redirect_to articles_path
+      end
     end
   end
 

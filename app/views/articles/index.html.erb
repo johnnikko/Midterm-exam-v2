@@ -5,9 +5,9 @@
 <table class="table table-bordered">
   <thead>
     <td width="5%">Id</td>
-    <td width="75%">Article</td>
+    <td width="70%">Article</td>
     <td width="10%">Category</td>
-    <td width="10%">Action</td>
+    <td width="15%">Action</td>
   </thead>
   <tbody>
     <% @articles.each do |article| %>
@@ -15,7 +15,10 @@
         <td><%= article.id %></td>
         <td><%= article.title %></td>
         <td><%= article.category.name %></td>
-        <td><%= link_to "Edit", edit_article_path(article,page: params[:page]), class: "btn btn-warning" %></td>
+        <td>
+          <%= link_to "Edit", edit_article_path(article,page: params[:page]), class: "btn btn-warning" %>
+          <%= link_to "Delete", article_path(article),method: :delete, class: "btn btn-danger" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
