@@ -1,12 +1,21 @@
 class ArticlesController < ApplicationController
   before_action :set_articles, only: [:edit,:update,:destroy,:show]
   before_action :authenticate_user!, only: [:create,:edit,:update,:destroy,:show]
-  before_action :check_user, only: [:update,:delete]
+  before_action :check_user, only: [:update,:delete,:destroy]
 
   def index
     @articles = Article.includes(:category).page(params[:page]).per(10)
-    @article = Article.new
-    @article = Article.find(params[:id]) if params[:id]
+    if params[:id]
+      @article = Article.find(params[:id])
+      if @article.user_id != current_user.id
+        flash[:danger] = "User can only edit its own articles!"
+        redirect_to articles_path
+      else
+        @article = Article.find(params[:id]) if params[:id]
+      end
+    else
+      @article = Article.new
+    end
   end
 
   def create

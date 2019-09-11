@@ -28,7 +28,7 @@
           <td><%= time_ago_in_words(article.created_at) %></td>
           <td>
             <%= link_to "Show", article_path(article), class: "btn btn-xs btn-primary" %>
-            <%= link_to "View", articles_path(id: article.id), class: "btn btn-xs btn-warning" %>
+            <%= link_to "Edit", articles_path(id: article.id), class: "btn btn-xs btn-warning" %>
             <%= link_to "Delete", article_path(article),method: :delete, class: "btn btn-xs btn-danger" %>
           </td>
         </tr>
