@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_articles, only: [:edit,:update,:destroy]
+  before_action :set_articles, only: [:edit,:update,:destroy,:show]
   def index
     @articles = Article.includes(:category).page(params[:page]).per(10)
   end
@@ -45,6 +45,10 @@ class ArticlesController < ApplicationController
         redirect_to articles_path
       end
     end
+  end
+
+  def show
+
   end
 
   private
