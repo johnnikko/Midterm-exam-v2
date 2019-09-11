@@ -3,7 +3,6 @@
     <h1 class="panel-title">Article Information</h1>
   </div>
   <div class="panel-body">
-    <%= render partial: "shared/messages", locals:{obj: article} %>
     <%= form_for article, url: url, method: methods do |f|%>
       <div class="form-group">
         <%= f.label :title, class: "control-label" %>

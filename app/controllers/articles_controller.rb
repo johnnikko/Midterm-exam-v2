@@ -15,7 +15,8 @@ class ArticlesController < ApplicationController
       flash[:success] = "Article saved!"
       redirect_to articles_path
     else
-      render :index
+      flash[:danger] = "Article failed to save!"
+      redirect_to articles_path
     end
   end
 
@@ -28,7 +29,8 @@ class ArticlesController < ApplicationController
       flash[:sucsess] = "Article updated!"
       redirect_to articles_path(page: params[:page])
     else
-      render :index
+      flash[:danger] = "Article failed to save!"
+      redirect_to articles_path(page: params[:page])
     end
   end
 
