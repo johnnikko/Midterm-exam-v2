@@ -2,11 +2,7 @@
 <hr>
 <div class="row">
   <div class="col-sm-4">
-    <% if params[:id] %>
-      <%= render partial: "form", locals:{article: @article,url: article_path(@article), methods: :put } %>
-    <% else %>
-      <%= render partial: "form", locals:{article: @article,url: articles_path, methods: :post } %>
-    <% end %>
+      <%= render partial: "form", locals:{article: @article,url: @url, methods: @method } %>
   </div>
   <div class="col-sm-8">
     <table class="table table-bordered">

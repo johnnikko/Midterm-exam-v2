@@ -12,9 +12,13 @@ class ArticlesController < ApplicationController
         redirect_to articles_path
       else
         @article = Article.find(params[:id]) if params[:id]
+        @url = article_path(@article)
+        @method = :put
       end
     else
       @article = Article.new
+      @url = articles_path
+      @method = :post
     end
   end
 
