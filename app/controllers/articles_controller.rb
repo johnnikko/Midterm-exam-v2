@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article.includes(:category).page(params[:page]).per(10)
     @article = Article.new
+    @article = Article.find(params[:id]) if params[:id]
   end
 
   def create
