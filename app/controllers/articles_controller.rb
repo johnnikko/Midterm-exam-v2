@@ -2,9 +2,6 @@ class ArticlesController < ApplicationController
   before_action :set_articles, only: [:edit,:update,:destroy,:show]
   def index
     @articles = Article.includes(:category).page(params[:page]).per(10)
-  end
-
-  def new
     @article = Article.new
   end
 

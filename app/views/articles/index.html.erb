@@ -1,27 +1,34 @@
 <h1>Articles</h1>
-<%= link_to "Add Article", new_article_path, class: "btn btn-success" %>
+<div class="row">
+  <div class="col-sm-12">
+    <%= render partial: "form", locals:{article: @article,url: articles_path, methods: :post} %>
+  </div>
+</div>
 <br>
-<br>
-<table class="table table-bordered">
-  <thead>
-    <td width="5%">Id</td>
-    <td width="65%">Article</td>
-    <td width="10%">Category</td>
-    <td width="20%">Action</td>
-  </thead>
-  <tbody>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= article.id %></td>
-        <td><%= article.title %></td>
-        <td><%= article.category.name %></td>
-        <td>
-          <%= link_to "Show", article_path(article), class: "btn btn-primary" %>
-          <%= link_to "Edit", edit_article_path(article,page: params[:page]), class: "btn btn-warning" %>
-          <%= link_to "Delete", article_path(article),method: :delete, class: "btn btn-danger" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @articles %>
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table table-bordered">
+      <thead>
+      <td width="5%">Id</td>
+      <td width="65%">Article</td>
+      <td width="10%">Category</td>
+      <td width="20%">Action</td>
+      </thead>
+      <tbody>
+      <% @articles.each do |article| %>
+        <tr>
+          <td><%= article.id %></td>
+          <td><%= article.title %></td>
+          <td><%= article.category.name %></td>
+          <td>
+            <%= link_to "Show", article_path(article), class: "btn btn-primary" %>
+            <%= link_to "Edit", edit_article_path(article,page: params[:page]), class: "btn btn-warning" %>
+            <%= link_to "Delete", article_path(article),method: :delete, class: "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= paginate @articles %>
+  </div>
+</div>
