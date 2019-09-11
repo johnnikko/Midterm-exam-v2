@@ -19,29 +19,36 @@
             </div>
           </div>
         </div>
-        <label>Comments</label>
+        <div class="row">
+          <div class="col-sm-12">
+            <%= render partial: "comments/comments", locals:{comment: @comment, article: @article} %>
+          </div>
+        </div>
         <hr>
-        <div class="form-horizontal">
-          <% @comments.each do |comment| %>
-            <div class="form-group">
-              <label class="text-right col-sm-3">Comment by:</label>
-              <div class="col-sm-9">
-                <p><%= comment.user.email %></p>
-              </div>
-              <label class="text-right col-sm-3">Comment:</label>
-              <div class="col-sm-9">
-                <p><%= comment.content %></p>
-              </div>
-              <label class="text-right col-sm-3">Dated added:</label>
-              <div class="col-sm-9">
-                <p><%= time_ago_in_words(comment.created_at) %></p>
-              </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-horizontal">
+              <% @comments.each do |comment| %>
+                <div class="form-group">
+                  <label class="text-right col-sm-3">Comment by:</label>
+                  <div class="col-sm-9">
+                    <p><%= comment.user.email %></p>
+                  </div>
+                  <label class="text-right col-sm-3">Comment:</label>
+                  <div class="col-sm-9">
+                    <p><%= comment.content %></p>
+                  </div>
+                  <label class="text-right col-sm-3">Dated added:</label>
+                  <div class="col-sm-9">
+                    <p><%= time_ago_in_words(comment.created_at) %></p>
+                  </div>
+                </div>
+                <hr>
+              <% end %>
             </div>
-            <hr>
-          <% end %>
+          </div>
         </div>
         <div class="pull-right">
-
         </div>
       </div>
     </div>

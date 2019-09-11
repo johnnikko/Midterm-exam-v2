@@ -1,0 +1,9 @@
+<%= form_for comment, url: article_comments_path(article), method: :post do |f|%>
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: "form-control", rows: "5" %>
+  </div>
+  <div class="pull-right">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
