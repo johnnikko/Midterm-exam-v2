@@ -5,8 +5,10 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.includes(:category).page(params[:page]).per(10)
+
     if params[:id]
       @article = Article.find(params[:id])
+
       if @article.user_id != current_user.id
         flash[:danger] = "User can only edit its own articles!"
         redirect_to articles_path

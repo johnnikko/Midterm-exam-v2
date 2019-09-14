@@ -12,7 +12,7 @@
   category = Category.create(name: "type B")
   category = Category.create(name: "type C")
 
-  name = Faker::Name
+  name = Faker::Name.first_name
   10.times do
     user = User.create(email: "#{name}@gmail.com", password: "qwer4321")
   end
